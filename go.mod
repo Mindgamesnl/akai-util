@@ -19,5 +19,6 @@ require (
 	github.com/godbus/dbus v4.1.0+incompatible // indirect
 	github.com/lawl/pulseaudio v0.0.0-20220626105240-976bed5e247c // indirect
 	github.com/oxtoacart/bpool v0.0.0-20190530202638-03653db5a59c // indirect
+	github.com/rakyll/portmidi v0.0.0-20201020180702-d436ceaa537a // indirect
 	golang.org/x/sys v0.1.0 // indirect
 )

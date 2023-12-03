@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"akai-util/led"
 	"fmt"
 	"github.com/sqp/pulseaudio"
 	"log"
@@ -19,7 +20,12 @@ func InitPulse() {
 	pa = NewPAClient(pacClient)
 }
 
-func PulseAppVolume(applicationName string) func(byte) {
+// subscribe to the loudness of an application
+func SubscribeAppVolume(applicationName string, handler func(float32)) {
+
+}
+
+func PulseAppVolume(displayFader int, applicationName string) func(byte) {
 	trackedSinks = append(trackedSinks, applicationName)
 	fmt.Println("Registering app " + applicationName)
 	return func(value byte) {
@@ -28,8 +34,14 @@ func PulseAppVolume(applicationName string) func(byte) {
 			fmt.Println("Error refreshing streams", err)
 			return
 		}
-		fmt.Println("Setting "+applicationName+" to", value)
-		err2 := pa.ProcessVolumeAction(applicationName, float32(value))
+
+		ival := float32(value)
+		ival = ival / 127 * 100
+
+		led.SetFaderPosition(displayFader, int(ival))
+
+		fmt.Println(" Setting "+applicationName+" to", ival)
+		err2 := pa.ProcessVolumeAction(applicationName, ival)
 		if err2 != nil {
 			fmt.Println("Error setting volume", err2)
 			return

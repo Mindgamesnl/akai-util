@@ -4,14 +4,18 @@ import "akai-util/utils"
 
 func SetupHandlers() {
 	// spotify fader 1
-	utils.RegisterMidiHandler(0, utils.PulseAppVolume("spotify"))
+	utils.RegisterMidiControlChange(7, 0, utils.PulseAppVolume(0, "spotify"))
 
 	// chrome fader 2
-	utils.RegisterMidiHandler(1, utils.PulseAppVolume("Google Chrome"))
+	utils.RegisterMidiControlChange(7, 1, utils.PulseAppVolume(1, "Google Chrome"))
+
+	utils.RegisterMidiControlChange(7, 2, utils.PulseAppVolume(2, "java"))
+
+	// Firefox fader 3
+	utils.RegisterMidiControlChange(7, 3, utils.PulseAppVolume(3, "Firefox"))
 
 	// discord fader 3
-	utils.RegisterMidiHandler(2, utils.PulseAppVolume("WEBRTC VoiceEngine"))
+	utils.RegisterMidiControlChange(7, 4, utils.PulseAppVolume(4, "WEBRTC VoiceEngine"))
 
 	// minecraft fader 4
-	utils.RegisterMidiHandler(3, utils.PulseAppVolume("java"))
 }
