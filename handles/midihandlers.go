@@ -1,6 +1,9 @@
 package handles
 
-import "akai-util/utils"
+import (
+	"akai-util/commands"
+	"akai-util/utils"
+)
 
 func SetupHandlers() {
 	// spotify fader 1
@@ -17,5 +20,6 @@ func SetupHandlers() {
 	// discord fader 3
 	utils.RegisterMidiControlChange(7, 4, utils.PulseAppVolume(4, "WEBRTC VoiceEngine"))
 
-	// minecraft fader 4
+	utils.RegisterMidiNoteOn(82, 0, commands.Script("/home/mats/Desktop/wallpapers", "random.sh"))
+	utils.RegisterMidiNoteOn(83, 0, commands.Script("/home/mats/Desktop/wallpapers", "download-and-set.sh"))
 }

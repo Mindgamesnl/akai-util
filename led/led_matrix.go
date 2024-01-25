@@ -115,10 +115,11 @@ func DrawMatrix(s *portmidi.Stream, matrix [][]bool) {
 func DrawVumeters(s *portmidi.Stream) {
 
 	for {
-		matrix := DrawVuToMatrix()
-
-		DrawMatrix(s, matrix)
-		time.Sleep(150 * time.Millisecond)
+		updated, matrix := Render()
+		if updated {
+			DrawMatrix(s, matrix)
+		}
+		time.Sleep(time.Duration(MS_BETWEEN_UPDATES) * time.Millisecond)
 	}
 }
 

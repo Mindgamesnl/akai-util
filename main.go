@@ -47,6 +47,7 @@ func main() {
 	}
 
 	go led.DrawVumeters(out)
+	go led.StartBlinkLoop(out)
 
 	// subscribe to the in.Listen() channel
 	go func() {
@@ -77,6 +78,7 @@ func handleMidiIn(event portmidi.Event) {
 		fmt.Printf("Note Off - Channel: %d, Key: %d, Velocity: %d", event.Status&0x0F, event.Data1, event.Data2)
 	case 0x90:
 		fmt.Printf("Note On - Channel: %d, Key: %d, Velocity: %d", event.Status&0x0F, event.Data1, event.Data2)
+		utils.FireMidiNoteOn(byte(event.Data1), byte(event.Status&0x0F))
 	// Add more cases for other MIDI event types as needed
 	case 0xB0:
 		fmt.Printf("Control Change - Channel: %d, Controller Number: %d, Value: %d", event.Status&0x0F, event.Data1, event.Data2)
