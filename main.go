@@ -3,6 +3,7 @@ package main
 import (
 	"akai-util/handles"
 	"akai-util/led"
+	"akai-util/obs"
 	"akai-util/utils"
 	"fmt"
 	"github.com/getlantern/systray"
@@ -48,6 +49,7 @@ func main() {
 
 	go led.DrawVumeters(out)
 	go led.StartBlinkLoop(out)
+	obs.Init(out)
 
 	// subscribe to the in.Listen() channel
 	go func() {
@@ -81,7 +83,7 @@ func handleMidiIn(event portmidi.Event) {
 		utils.FireMidiNoteOn(byte(event.Data1), byte(event.Status&0x0F))
 	// Add more cases for other MIDI event types as needed
 	case 0xB0:
-		fmt.Printf("Control Change - Channel: %d, Controller Number: %d, Value: %d", event.Status&0x0F, event.Data1, event.Data2)
+		fmt.Println(fmt.Sprintf("Control Change - Channel: %d, Controller Number: %d, Value: %d", event.Status&0x0F, event.Data1, event.Data2))
 		utils.FireMidiControlChange(byte(event.Data1), byte(event.Status&0x0F), byte(event.Data2))
 		return
 	default:

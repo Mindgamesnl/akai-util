@@ -102,6 +102,10 @@ func SetLed(s *portmidi.Stream, channel int64, key int64, velocity int64, noteOn
 	return s.WriteShort(status|channel, key, velocity)
 }
 
+func SetControlValue(s *portmidi.Stream, channel int64, control int64, value int64) error {
+	return s.WriteShort(0xB0|channel, control, value)
+}
+
 // draw a 2d bool array to the midi matrix
 func DrawMatrix(s *portmidi.Stream, matrix [][]bool) {
 	for x := 0; x < 9; x++ {

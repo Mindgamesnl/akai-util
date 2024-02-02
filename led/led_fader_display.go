@@ -11,31 +11,9 @@ var (
 	drawingTextFrames  = 0
 	drawingText        = false
 	textToDraw         = ""
-	MS_BETWEEN_UPDATES = 20
+	MS_BETWEEN_UPDATES = 100
 	includeLetterSpace = true
 )
-
-type Country string
-
-var (
-	rlName  = "Mats"
-	igName  = "ToetMats"
-	age     = 22
-	origin  = Country("The Netherlands, Den Haag")
-	type_   = "Student"
-	hobbies = []string{"Skating", "Partying W/ friends", "Programming"}
-	bands   = []string{"Bring Me The Horizon", "Vistas", "Neck Deep", "The Snuts"}
-)
-
-type Person struct {
-	rlName  string
-	igName  string
-	age     int
-	origin  Country
-	type_   string
-	hobbies []string
-	bands   []string
-}
 
 func SetFaderPosition(fader int, position int) {
 	faderPositions[fader] = position

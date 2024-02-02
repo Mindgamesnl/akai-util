@@ -20,6 +20,8 @@ func SetupHandlers() {
 	// discord fader 3
 	utils.RegisterMidiControlChange(7, 4, utils.PulseAppVolume(4, "WEBRTC VoiceEngine"))
 
-	utils.RegisterMidiNoteOn(82, 0, commands.Script("/home/mats/Desktop/wallpapers", "random.sh"))
-	utils.RegisterMidiNoteOn(83, 0, commands.Script("/home/mats/Desktop/wallpapers", "download-and-set.sh"))
+	utils.RegisterMidiControlChange(7, 7, utils.PulseAppVolume(7, "*"))
+
+	utils.RegisterMidiNoteOn(50, 0, commands.Script("/home/mats/Desktop/wallpapers", "random.sh"))
+	utils.RegisterMidiNoteOn(49, 0, commands.Script("/home/mats/Desktop/wallpapers", "download-and-set.sh"))
 }

@@ -45,14 +45,14 @@ func StartBlinkLoop(s *portmidi.Stream) {
 					fmt.Println("Removing blinking led", led.channel, led.key)
 					SetLed(s, led.channel, led.key, 0, false)
 					blinkingLedIds = append(blinkingLedIds[:i], blinkingLedIds[i+1:]...)
-					i--
-					// would this move i out of bounds?
-					if i >= maxLights-1 {
-						break
+					// are there still lights to blink?
+					if i+1 < maxLights {
+						i--
 					}
 					continue
+				} else {
+					SetLed(s, led.channel, led.key, 127, flip)
 				}
-				SetLed(s, led.channel, led.key, 127, flip)
 			}
 			lock.Unlock()
 			flip = !flip
