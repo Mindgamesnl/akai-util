@@ -49,7 +49,7 @@ func StartBlinkLoop(s *portmidi.Stream) {
 					if i+1 < maxLights {
 						i--
 					}
-					continue
+					break
 				} else {
 					SetLed(s, led.channel, led.key, 127, flip)
 				}

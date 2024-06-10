@@ -24,4 +24,9 @@ func SetupHandlers() {
 
 	utils.RegisterMidiNoteOn(50, 0, commands.Script("/home/mats/Desktop/wallpapers", "random.sh"))
 	utils.RegisterMidiNoteOn(49, 0, commands.Script("/home/mats/Desktop/wallpapers", "download-and-set.sh"))
+
+	// reboot & shutdown
+	utils.RegisterMidiNoteOn(50, 7, commands.Script("/home/mats/workspace/personal/akai-util", "reboot.sh"))
+	utils.RegisterMidiNoteOn(48, 7, commands.Script("/home/mats/workspace/personal/akai-util", "shutdown.sh"))
+
 }
